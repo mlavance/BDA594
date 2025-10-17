@@ -20,18 +20,8 @@ trendDfFull <- read_csv("googleTrendData.csv")
 #removing repeated data (1:31)
 trendDfFull <- trendDfFull[,-1]
 
-#maxing the rows align (stock data had the rows in reverse order)
+#making the rows align (stock data had the rows in reverse order)
 stockDf <- CombinedData[nrow(CombinedData):1, ]
-
-{
-#removing amazon (since there is no good google trends info for it)
-stockDf <- subset(stockDf, select = 
-                      -`Average_Amazon.com Stock Price History`)
-
-#dropping walmart :)
-stockDf <- subset(stockDf, select = 
-                    -`Average_Walmart Stock Price History`)
-}
 
 #aligning the columns for future easy of use
 stockDf <- stockDf[ , c(1, order(names(stockDf)[-1]) + 1)]
@@ -68,5 +58,6 @@ rm(trendDfFull)
 rm(longnames)
 
 write.csv(alldf, "finalData.csv")
+
 
 
